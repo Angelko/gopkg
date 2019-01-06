@@ -11,11 +11,27 @@ func TestNewFunction(t *testing.T) {
 	func() {
 		// init
 		fName := `main`
-		fContent := `\tfmt.Println("Hello world")`
-		f := NewFunction(fName, fContent)
+		f := NewFunction(fName)
 
 		// assert
 		if assert.NotNil(t, f) {
+			assert.Equal(t, fName, f.name)
+			assert.Equal(t, "", f.content)
+		}
+	}()
+}
+
+func TestSetContent(t *testing.T) {
+	// default: should be ok
+	func() {
+		// init
+		fName := `main`
+		fContent := `\tfmt.Println("Hello world")`
+		f := NewFunction(fName)
+
+		// assert
+		if assert.NotNil(t, f) {
+			f.SetContent(fContent)
 			assert.Equal(t, fName, f.name)
 			assert.Equal(t, fContent, f.content)
 		}
@@ -28,7 +44,7 @@ func TestAddArg(t *testing.T) {
 		// init
 		argName := `message`
 		argType := `string`
-		f := NewFunction(`main`, `content`)
+		f := NewFunction(`main`)
 		f.AddArg(argName, argType)
 
 		// assert
@@ -46,7 +62,7 @@ func TestAddRet(t *testing.T) {
 		// init
 		retName := `err`
 		retType := `error`
-		f := NewFunction(`main`, `content`)
+		f := NewFunction(`main`)
 		f.AddRet(retName, retType)
 
 		// assert

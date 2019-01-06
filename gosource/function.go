@@ -9,11 +9,15 @@ type Function struct {
 }
 
 // NewFunction return a fresh function without arg and return element
-func NewFunction(name string, content string) *Function {
+func NewFunction(name string) *Function {
 	return &Function{
-		name:    name,
-		content: content,
+		name: name,
 	}
+}
+
+// SetContent function
+func (f *Function) SetContent(content string) {
+	f.content = content
 }
 
 // AddArg on the parameters function

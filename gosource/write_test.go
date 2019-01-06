@@ -37,7 +37,8 @@ func TestBytes(t *testing.T) {
 	func() {
 		// init
 		g := New("", "test")
-		f := NewFunction("main", `fmt.Println()`)
+		f := NewFunction("main")
+		f.SetContent(`fmt.Println()`)
 		g.AddFunction(f)
 		content, err := g.Bytes()
 
@@ -56,12 +57,14 @@ func TestBytes(t *testing.T) {
 		g.SetImports("fmt")
 		g.AddConst("message", "string", "Hello world")
 		g.AddGlobal("nbr", "int", 1)
-		f := NewFunction("test", "\tfor i := 0; i < n; i++ {\n\t\tfmt.Println(m)\n\t}\n\treturn nil\n")
+		f := NewFunction("test")
+		f.SetContent("\tfor i := 0; i < n; i++ {\n\t\tfmt.Println(m)\n\t}\n\treturn nil\n")
 		f.AddArg("n", "int")
 		f.AddArg("m", "string")
 		f.AddRet("err", "error")
 		g.AddFunction(f)
-		f = NewFunction("main", "\t_ = test(nbr, message)\n")
+		f = NewFunction("main")
+		f.SetContent("\t_ = test(nbr, message)\n")
 		g.AddFunction(f)
 		content, err := g.Bytes()
 

@@ -105,6 +105,7 @@ func (g *GoSource) Bytes() ([]byte, error) {
 	g.printFunction()
 
 	if content, err = format.Source(g.buf.Bytes()); err != nil {
+		fmt.Println(string(g.buf.Bytes()))
 		return nil, err
 	}
 	return content, nil
